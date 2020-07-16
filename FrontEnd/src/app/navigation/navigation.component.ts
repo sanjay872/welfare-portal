@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { authService } from '../shared/auth.service';
+import { Component, OnInit} from '@angular/core';
+import { AuthService } from '../shared/auth.service';
+import { authService } from '../Auth/auth.service';
+import { sharedService } from '../shared/shared.service';
 
 @Component({
   selector: 'app-navigation',
@@ -7,12 +9,13 @@ import { authService } from '../shared/auth.service';
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent implements OnInit {
-
-  constructor(private authservice:authService) { }
+  group:string;
+  constructor(private authservice:authService,private shared:sharedService) {}
 
   ngOnInit() {
+   this.group=this.authservice.group;
   }
- logout(){
-  this.authservice.logout();
+  logout(){
+  this.shared.logout();
   }
 }
